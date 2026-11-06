@@ -1,6 +1,6 @@
 # Digital Rajen Consultation Landing Page
 
-A focused Next.js landing page for a free one-hour AI marketing consultation, plus a `/thank-you` page.
+A focused Next.js landing page for a free 30-minute AI marketing consultation, plus a `/thank-you` page.
 
 ## Run locally
 
@@ -28,9 +28,9 @@ npm run build
 
 ## Before you launch
 
-- Add the Vimeo URL in `lib/config.ts`.
-- Add the WhatsApp number in `lib/config.ts` using country code and digits only.
+- Replace the temporary Vimeo demo URL in `lib/config.ts` with the final video.
+- Confirm the WhatsApp number in `lib/config.ts`.
 - Add the square favicon when it is available.
-- Replace the simulated form submission in `lib/submitLead.ts` with a real backend.
 - Set `NEXT_PUBLIC_SITE_URL` to the real production domain.
-- Submit a test lead after the backend is connected.
+- Submit a real test lead and confirm it appears in the correct Flodesk segment.
+- Confirm the Flodesk workflow sends the expected automation email.
