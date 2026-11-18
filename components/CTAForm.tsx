@@ -1,7 +1,6 @@
 "use client";
 
 import { FormEvent, useEffect, useRef, useState } from "react";
-import Script from "next/script";
 import { siteConfig } from "@/lib/config";
 import { flodeskFormConfig, type LeadData } from "@/lib/submitLead";
 
@@ -135,7 +134,6 @@ export default function CTAForm() {
             data-ff-name="inlineNoImage"
             data-ff-stage="default"
           >
-            <div data-ff-el="config" data-ff-config={flodeskFormConfig.encodedConfig} className="hidden" />
             <form
               className={`${flodeskFormConfig.rootClass}__form mt-8`}
               action={flodeskFormConfig.action}
@@ -243,31 +241,6 @@ export default function CTAForm() {
                 {submissionError}
               </div>
             </form>
-            <Script id="flodesk-universal-bootstrap" strategy="afterInteractive">
-              {`(function(w, d, t, h, s, n) {
-  w.FlodeskObject = n;
-  var fn = function() { (w[n].q = w[n].q || []).push(arguments); };
-  w[n] = w[n] || fn;
-  var f = d.getElementsByTagName(t)[0];
-  var v = '?v=' + Math.floor(new Date().getTime() / (120 * 1000)) * 60;
-  var sm = d.createElement(t);
-  sm.async = true;
-  sm.type = 'module';
-  sm.src = h + s + '.mjs' + v;
-  f.parentNode.insertBefore(sm, f);
-  var sn = d.createElement(t);
-  sn.async = true;
-  sn.noModule = true;
-  sn.src = h + s + '.js' + v;
-  f.parentNode.insertBefore(sn, f);
-})(window, document, 'script', 'https://assets.flodesk.com', '/universal', 'fd');`}
-            </Script>
-            <Script id="flodesk-form-handler" strategy="afterInteractive">
-              {`window.fd('form:handle', {
-  formId: '${flodeskFormConfig.id}',
-  rootEl: '.${flodeskFormConfig.rootClass}',
-});`}
-            </Script>
           </div>
         </div>
       </div>
