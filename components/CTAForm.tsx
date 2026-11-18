@@ -113,7 +113,7 @@ export default function CTAForm() {
   return (
     <section id="form" className="section-space scroll-mt-4 bg-slate-50" aria-labelledby="form-heading">
       <div className="page-shell">
-        <div className="mx-auto max-w-3xl rounded-[2rem] border border-line bg-white p-5 shadow-soft sm:p-9 lg:p-12">
+        <div className="mx-auto max-w-3xl rounded-4xl border border-line bg-white p-5 shadow-soft sm:p-9 lg:p-12">
           <div className="flex flex-wrap justify-center gap-2">
             {siteConfig.copy.form.badges.map((badge) => (
               <span key={badge} className="rounded-full bg-primary-soft px-3 py-1.5 text-xs font-bold text-primary sm:text-sm">
@@ -134,6 +134,7 @@ export default function CTAForm() {
             data-ff-name="inlineNoImage"
             data-ff-stage="default"
           >
+            <div data-ff-el="config" data-ff-config={flodeskFormConfig.encodedConfig} className="hidden" />
             <form
               className={`${flodeskFormConfig.rootClass}__form mt-8`}
               action={flodeskFormConfig.action}
@@ -219,7 +220,7 @@ export default function CTAForm() {
                     onChange={(event) => setIsHuman(event.target.checked)}
                     required
                     aria-required="true"
-                    className="h-4 w-4 rounded border-line accent-primary focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-200"
+                    className="h-4 w-4 rounded-sm border-line accent-primary focus-visible:outline-hidden focus-visible:ring-4 focus-visible:ring-blue-200"
                   />
                   <span>I am not a robot</span>
                 </label>

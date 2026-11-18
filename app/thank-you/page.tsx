@@ -17,7 +17,7 @@ export default function ThankYouPage() {
       <Header />
       <main className="min-h-[calc(100vh-100px)] bg-slate-50 py-12 sm:py-16 lg:py-20">
         <div className="page-shell">
-          <section className="mx-auto max-w-3xl rounded-[2rem] border border-line bg-white px-5 py-10 text-center shadow-soft sm:px-10 sm:py-14">
+          <section className="mx-auto max-w-3xl rounded-4xl border border-line bg-white px-5 py-10 text-center shadow-soft sm:px-10 sm:py-14">
             <div className="mx-auto mb-6 flex size-14 items-center justify-center rounded-full bg-green-50 text-3xl font-extrabold text-success" aria-hidden="true">
               ✓
             </div>

@@ -1,61 +1,107 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
 
-:root {
-  --primary: #0051fa;
-  --primary-hover: #0043cc;
-  --primary-soft: #eaf1ff;
-  --accent: #ffc21a;
-  --success: #16a34a;
-  --background: #ffffff;
-  --alternate: #f8fafc;
-  --ink: #0f172a;
-  --body: #475569;
-  --line: #e2e8f0;
-  --danger: #dc2626;
-  --whatsapp: #25d366;
+@theme {
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-soft: var(--primary-soft);
+
+  --color-accent: var(--accent);
+  --color-success: var(--success);
+  --color-ink: var(--ink);
+  --color-body: var(--body);
+  --color-line: var(--line);
+  --color-danger: var(--danger);
+  --color-whatsapp: var(--whatsapp);
+
+  --shadow-soft: 0 16px 44px rgba(15, 23, 42, 0.08);
+  --shadow-card: 0 8px 28px rgba(15, 23, 42, 0.06);
+
+  --animate-fade-up: fadeUp 650ms ease-out both;
+
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 }
 
-* {
-  box-sizing: border-box;
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
 }
 
-html {
-  scroll-behavior: smooth;
+@utility page-shell {
+  @apply mx-auto w-full max-w-6xl px-5 sm:px-8;
 }
 
-body {
-  margin: 0;
-  overflow-x: hidden;
-  background: var(--background);
-  color: var(--body);
+@utility section-space {
+  @apply py-16 sm:py-20 lg:py-24;
 }
 
-::selection {
-  background: var(--primary-soft);
-  color: var(--ink);
+@utility section-heading {
+  @apply text-balance text-center text-3xl font-extrabold tracking-[-0.035em] text-ink sm:text-4xl;
 }
 
-@layer components {
-  .page-shell {
-    @apply mx-auto w-full max-w-6xl px-5 sm:px-8;
+@utility primary-cta {
+  @apply inline-flex min-h-14 items-center justify-center rounded-full bg-primary px-7 py-3.5 text-center text-base font-extrabold text-white shadow-lg shadow-blue-600/20 transition duration-200 hover:-translate-y-0.5 hover:bg-primary-hover focus-visible:outline-hidden focus-visible:ring-4 focus-visible:ring-blue-200 disabled:cursor-not-allowed disabled:opacity-65 disabled:hover:translate-y-0;
+}
+
+@utility field-input {
+  @apply min-h-[52px] w-full rounded-2xl border border-line bg-white px-4 py-3 text-base text-ink outline-hidden transition placeholder:text-slate-400 focus:border-primary focus:ring-4 focus:ring-blue-100;
+}
+
+@layer utilities {
+  :root {
+    --primary: #0051fa;
+    --primary-hover: #0043cc;
+    --primary-soft: #eaf1ff;
+    --accent: #ffc21a;
+    --success: #16a34a;
+    --background: #ffffff;
+    --alternate: #f8fafc;
+    --ink: #0f172a;
+    --body: #475569;
+    --line: #e2e8f0;
+    --danger: #dc2626;
+    --whatsapp: #25d366;
   }
 
-  .section-space {
-    @apply py-16 sm:py-20 lg:py-24;
+  * {
+    box-sizing: border-box;
   }
 
-  .section-heading {
-    @apply text-balance text-center text-3xl font-extrabold tracking-[-0.035em] text-ink sm:text-4xl;
+  html {
+    scroll-behavior: smooth;
   }
 
-  .primary-cta {
-    @apply inline-flex min-h-14 items-center justify-center rounded-full bg-primary px-7 py-3.5 text-center text-base font-extrabold text-white shadow-lg shadow-blue-600/20 transition duration-200 hover:-translate-y-0.5 hover:bg-primary-hover focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-200 disabled:cursor-not-allowed disabled:opacity-65 disabled:hover:translate-y-0;
+  body {
+    margin: 0;
+    overflow-x: hidden;
+    background: var(--background);
+    color: var(--body);
   }
 
-  .field-input {
-    @apply min-h-[52px] w-full rounded-2xl border border-line bg-white px-4 py-3 text-base text-ink outline-none transition placeholder:text-slate-400 focus:border-primary focus:ring-4 focus:ring-blue-100;
+  ::selection {
+    background: var(--primary-soft);
+    color: var(--ink);
   }
 }
 
