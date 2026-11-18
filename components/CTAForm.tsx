@@ -134,6 +134,7 @@ export default function CTAForm() {
             data-ff-name="inlineNoImage"
             data-ff-stage="default"
           >
+            <div data-ff-el="config" data-ff-config={flodeskFormConfig.encodedConfig} className="hidden" />
             <form
               className={`${flodeskFormConfig.rootClass}__form mt-8`}
               action={flodeskFormConfig.action}
