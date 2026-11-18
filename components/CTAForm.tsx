@@ -118,7 +118,9 @@ export default function CTAForm() {
   const [values, setValues] = useState<LeadData>(initialValues);
   const [errors, setErrors] = useState<Errors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const refs = useRef<Partial<Record<FieldName, HTMLInputElement | HTMLTextAreaElement | null>>>({});
+  const [isHuman, setIsHuman] = useState(false);
+  const refs = useRef<Partial<Record<FieldName, HTMLInputElement | null>>>({});
+  const robotCheckboxRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
     initializeFlodeskForm();
@@ -147,6 +149,12 @@ export default function CTAForm() {
     if (firstInvalid) {
       event.preventDefault();
       refs.current[firstInvalid]?.focus();
+      return;
+    }
+
+    if (!isHuman) {
+      event.preventDefault();
+      robotCheckboxRef.current?.focus();
       return;
     }
 
@@ -226,11 +234,11 @@ export default function CTAForm() {
                 <label htmlFor="message" className={`${flodeskFormConfig.rootClass}__label fd-form-label mb-2 block text-sm font-bold text-ink`}>
                   Anything You Want to Say
                 </label>
-                <textarea
+                <input
                   ref={(element) => { refs.current.message = element; }}
                   id="message"
                   name={flodeskFormConfig.fieldNames.message}
-                  rows={4}
+                  type="text"
                   maxLength={255}
                   data-ff-tab="fields.anythingYouWantToSay:fields.websiteOrFacebookUrl:submit"
                   value={values.message}
@@ -270,6 +278,18 @@ export default function CTAForm() {
                     {isSubmitting ? "Booking..." : siteConfig.copy.cta}
                   </button>
                 </div>
+                <label className="mt-4 flex cursor-pointer items-center justify-center gap-2 text-sm font-medium text-body">
+                  <input
+                    ref={robotCheckboxRef}
+                    type="checkbox"
+                    checked={isHuman}
+                    onChange={(event) => setIsHuman(event.target.checked)}
+                    required
+                    aria-required="true"
+                    className="h-4 w-4 rounded border-line accent-primary focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-200"
+                  />
+                  <span>I am not a robot</span>
+                </label>
                 <p className="mt-3 text-center text-sm font-medium text-body">{siteConfig.copy.form.trust}</p>
               </div>
               <div className={`${flodeskFormConfig.rootClass}__success fd-form-success hidden`} data-ff-el="success" aria-live="polite" />
