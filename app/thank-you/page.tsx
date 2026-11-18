@@ -27,6 +27,9 @@ export default function ThankYouPage() {
             <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-body sm:text-lg">
               Thank you for booking your free 30 Minutes AI marketing consultation.
             </p>
+            <p className="mx-auto mt-3 max-w-2xl text-sm leading-6 text-body">
+              If Flodesk sends a confirmation email, open it and click the confirmation link to activate your signup. Check your spam or Promotions folder if it is not in your inbox.
+            </p>
 
             <div className="mt-8 border-t border-line pt-8">
               <h2 className="text-2xl font-extrabold tracking-tight text-ink sm:text-3xl">
