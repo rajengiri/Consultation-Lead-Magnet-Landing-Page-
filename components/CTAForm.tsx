@@ -35,60 +35,6 @@ const fields: Array<{
   { name: "website", label: "Website or Facebook URL", placeholder: "yourwebsite.com or facebook.com/yourpage", inputMode: "url", flodeskName: flodeskFormConfig.fieldNames.website, flodeskTab: "fields.websiteOrFacebookUrl:fields.companyBusinessName:fields.anythingYouWantToSay" },
 ];
 
-type FlodeskFunction = {
-  (...args: unknown[]): void;
-  q?: unknown[][];
-};
-
-declare global {
-  interface Window {
-    FlodeskObject?: string;
-    fd?: FlodeskFunction;
-  }
-}
-
-function initializeFlodeskForm() {
-  const rootSelector = `.${flodeskFormConfig.rootClass}`;
-  const root = document.querySelector<HTMLElement>(rootSelector);
-  if (!root || root.dataset.flodeskBound === "true") return;
-
-  window.FlodeskObject = "fd";
-  if (!window.fd) {
-    const queue: FlodeskFunction = (...args: unknown[]) => {
-      queue.q = queue.q ?? [];
-      queue.q.push(args);
-    };
-    window.fd = queue;
-  }
-
-  const firstScript = document.getElementsByTagName("script")[0];
-  const cacheVersion = `?v=${Math.floor(Date.now() / 120000) * 60}`;
-
-  if (!document.getElementById("flodesk-universal-module")) {
-    const moduleScript = document.createElement("script");
-    moduleScript.id = "flodesk-universal-module";
-    moduleScript.async = true;
-    moduleScript.type = "module";
-    moduleScript.src = `https://assets.flodesk.com/universal.mjs${cacheVersion}`;
-    firstScript.parentNode?.insertBefore(moduleScript, firstScript);
-  }
-
-  if (!document.getElementById("flodesk-universal-legacy")) {
-    const legacyScript = document.createElement("script");
-    legacyScript.id = "flodesk-universal-legacy";
-    legacyScript.async = true;
-    legacyScript.noModule = true;
-    legacyScript.src = `https://assets.flodesk.com/universal.js${cacheVersion}`;
-    firstScript.parentNode?.insertBefore(legacyScript, firstScript);
-  }
-
-  window.fd("form:handle", {
-    formId: flodeskFormConfig.id,
-    rootEl: rootSelector,
-  });
-  root.dataset.flodeskBound = "true";
-}
-
 function validateField(name: FieldName, value: string): string {
   const trimmed = value.trim();
 
@@ -119,11 +65,14 @@ export default function CTAForm() {
   const [errors, setErrors] = useState<Errors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isHuman, setIsHuman] = useState(false);
+  const [submissionError, setSubmissionError] = useState("");
   const refs = useRef<Partial<Record<FieldName, HTMLInputElement | null>>>({});
   const robotCheckboxRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
-    initializeFlodeskForm();
+    if (new URLSearchParams(window.location.search).get("submission") === "failed") {
+      setSubmissionError("We couldn't submit your request. Please try again.");
+    }
   }, []);
 
   const updateField = (name: FieldName, value: string) => {
@@ -185,11 +134,6 @@ export default function CTAForm() {
             data-ff-name="inlineNoImage"
             data-ff-stage="default"
           >
-            <div
-              data-ff-el="config"
-              data-ff-config={flodeskFormConfig.encodedConfig}
-              className="hidden"
-            />
             <form
               className={`${flodeskFormConfig.rootClass}__form mt-8`}
               action={flodeskFormConfig.action}
@@ -293,7 +237,9 @@ export default function CTAForm() {
                 <p className="mt-3 text-center text-sm font-medium text-body">{siteConfig.copy.form.trust}</p>
               </div>
               <div className={`${flodeskFormConfig.rootClass}__success fd-form-success hidden`} data-ff-el="success" aria-live="polite" />
-              <div className={`${flodeskFormConfig.rootClass}__error fd-form-error mt-3 text-center text-sm font-semibold text-danger`} data-ff-el="error" role="alert" />
+              <div className={`${flodeskFormConfig.rootClass}__error fd-form-error mt-3 text-center text-sm font-semibold text-danger`} data-ff-el="error" role="alert">
+                {submissionError}
+              </div>
             </form>
           </div>
         </div>
