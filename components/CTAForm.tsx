@@ -267,17 +267,6 @@ export default function CTAForm() {
               />
             </div>
 
-                <div className={`${flodeskFormConfig.rootClass}__footer`} data-ff-el="footer">
-                  <button
-                    type="submit"
-                    className={`${flodeskFormConfig.rootClass}__button fd-btn primary-cta mt-7 w-full`}
-                    data-ff-el="submit"
-                    data-ff-tab="submit"
-                    disabled={isSubmitting}
-                  >
-                    {isSubmitting ? "Booking..." : siteConfig.copy.cta}
-                  </button>
-                </div>
                 <label className="mt-4 flex cursor-pointer items-center justify-center gap-2 text-sm font-medium text-body">
                   <input
                     ref={robotCheckboxRef}
@@ -290,6 +279,17 @@ export default function CTAForm() {
                   />
                   <span>I am not a robot</span>
                 </label>
+                <div className={`${flodeskFormConfig.rootClass}__footer`} data-ff-el="footer">
+                  <button
+                    type="submit"
+                    className={`${flodeskFormConfig.rootClass}__button fd-btn primary-cta mt-7 w-full`}
+                    data-ff-el="submit"
+                    data-ff-tab="submit"
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? "Booking..." : siteConfig.copy.cta}
+                  </button>
+                </div>
                 <p className="mt-3 text-center text-sm font-medium text-body">{siteConfig.copy.form.trust}</p>
               </div>
               <div className={`${flodeskFormConfig.rootClass}__success fd-form-success hidden`} data-ff-el="success" aria-live="polite" />
