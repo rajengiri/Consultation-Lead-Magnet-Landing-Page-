@@ -191,13 +191,13 @@ export default function CTAForm() {
               noValidate
             >
               <div className="fd-form-content" data-ff-el="content">
-                <div className="grid gap-5 sm:grid-cols-2" data-ff-el="fields">
+                <div className={`${flodeskFormConfig.rootClass}__fields grid gap-5 sm:grid-cols-2`} data-ff-el="fields">
               {fields.map((field) => {
                 const error = errors[field.name];
                 const isWide = field.name === "website";
                 return (
-                  <div key={field.name} className={isWide ? "sm:col-span-2" : undefined}>
-                    <label htmlFor={field.name} className="mb-2 block text-sm font-bold text-ink">
+                  <div key={field.name} className={`${flodeskFormConfig.rootClass}__field fd-form-group ${isWide ? "sm:col-span-2" : ""}`}>
+                    <label htmlFor={field.name} className={`${flodeskFormConfig.rootClass}__label fd-form-label mb-2 block text-sm font-bold text-ink`}>
                       {field.label}{field.required ? <span className="text-danger"> *</span> : null}
                     </label>
                     <input
@@ -215,15 +215,15 @@ export default function CTAForm() {
                       placeholder={field.placeholder}
                       aria-invalid={Boolean(error)}
                       aria-describedby={error ? `${field.name}-error` : undefined}
-                      className={`field-input ${error ? "border-danger focus:border-danger focus:ring-red-100" : ""}`}
+                      className={`${flodeskFormConfig.rootClass}__control fd-form-control field-input ${error ? "border-danger focus:border-danger focus:ring-red-100" : ""}`}
                     />
                     {error ? <p id={`${field.name}-error`} className="mt-1.5 text-sm font-semibold text-danger">{error}</p> : null}
                   </div>
                 );
               })}
 
-              <div className="sm:col-span-2">
-                <label htmlFor="message" className="mb-2 block text-sm font-bold text-ink">
+              <div className={`${flodeskFormConfig.rootClass}__field fd-form-group sm:col-span-2`}>
+                <label htmlFor="message" className={`${flodeskFormConfig.rootClass}__label fd-form-label mb-2 block text-sm font-bold text-ink`}>
                   Anything You Want to Say
                 </label>
                 <textarea
@@ -239,7 +239,7 @@ export default function CTAForm() {
                   placeholder="Tell us anything that will help us understand your business."
                   aria-invalid={Boolean(errors.message)}
                   aria-describedby={errors.message ? "message-error" : undefined}
-                  className={`field-input resize-y ${errors.message ? "border-danger focus:border-danger focus:ring-red-100" : ""}`}
+                  className={`${flodeskFormConfig.rootClass}__control fd-form-control field-input resize-y ${errors.message ? "border-danger focus:border-danger focus:ring-red-100" : ""}`}
                 />
                 {errors.message ? <p id="message-error" className="mt-1.5 text-sm font-semibold text-danger" role="alert">{errors.message}</p> : null}
               </div>
@@ -259,10 +259,10 @@ export default function CTAForm() {
               />
             </div>
 
-                <div data-ff-el="footer">
+                <div className={`${flodeskFormConfig.rootClass}__footer`} data-ff-el="footer">
                   <button
                     type="submit"
-                    className="primary-cta mt-7 w-full"
+                    className={`${flodeskFormConfig.rootClass}__button fd-btn primary-cta mt-7 w-full`}
                     data-ff-el="submit"
                     data-ff-tab="submit"
                     disabled={isSubmitting}
@@ -272,8 +272,8 @@ export default function CTAForm() {
                 </div>
                 <p className="mt-3 text-center text-sm font-medium text-body">{siteConfig.copy.form.trust}</p>
               </div>
-              <div className="hidden" data-ff-el="success" aria-live="polite" />
-              <div className="mt-3 text-center text-sm font-semibold text-danger" data-ff-el="error" role="alert" />
+              <div className={`${flodeskFormConfig.rootClass}__success fd-form-success hidden`} data-ff-el="success" aria-live="polite" />
+              <div className={`${flodeskFormConfig.rootClass}__error fd-form-error mt-3 text-center text-sm font-semibold text-danger`} data-ff-el="error" role="alert" />
             </form>
           </div>
         </div>
