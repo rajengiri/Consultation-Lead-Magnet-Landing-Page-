@@ -201,6 +201,11 @@ export default function CTAForm() {
             <div className="absolute left-[-9999px] top-auto h-px w-px overflow-hidden" aria-hidden="true">
               <label htmlFor="company">Company</label>
               <input
+                type="hidden"
+                name={flodeskFormConfig.fieldNames.activeEmail}
+                value={values.email}
+              />
+              <input
                 id="company"
                 name={flodeskFormConfig.fieldNames.honeypot}
                 type="text"
