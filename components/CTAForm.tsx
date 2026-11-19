@@ -1,8 +1,15 @@
 "use client";
 
 import { FormEvent, useEffect, useRef, useState } from "react";
+import Script from "next/script";
 import { siteConfig } from "@/lib/config";
 import { flodeskFormConfig, type LeadData } from "@/lib/submitLead";
+
+declare global {
+  interface Window {
+    fd?: (event: string, options: { formId: string; rootEl: string }) => void;
+  }
+}
 
 type FieldName = keyof LeadData;
 type Errors = Partial<Record<FieldName, string>>;
@@ -248,6 +255,16 @@ export default function CTAForm() {
               </div>
             </form>
           </div>
+          <Script
+            src="https://assets.flodesk.com/universal.mjs"
+            strategy="afterInteractive"
+            onReady={() => {
+              window.fd?.("form:handle", {
+                formId: flodeskFormConfig.id,
+                rootEl: `.${flodeskFormConfig.rootClass}`,
+              });
+            }}
+          />
         </div>
       </div>
     </section>

@@ -42,16 +42,14 @@ export async function POST(request: Request) {
     });
 
     const providerResponse = new URL(response.url);
-    const verifiedSubmission =
-      response.ok && providerResponse.pathname.startsWith(`/forms/${flodeskFormConfig.id}/verify/`);
-    if (providerResponse.searchParams.get("status") === "success" || verifiedSubmission) {
+    if (providerResponse.searchParams.get("status") === "success") {
       return NextResponse.redirect(flodeskFormConfig.successRedirect, 303);
     }
 
     console.error("Flodesk rejected the consultation form submission", {
       status: response.status,
       redirectStatus: providerResponse.searchParams.get("status"),
-      verifiedRouteSeen: providerResponse.pathname.startsWith(`/forms/${flodeskFormConfig.id}/verify/`),
+      providerVerificationRequired: providerResponse.pathname.startsWith(`/forms/${flodeskFormConfig.id}/verify/`),
     });
     return redirectToFormWithError(request);
   } catch {
