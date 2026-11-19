@@ -11,7 +11,7 @@ export type LeadData = {
 export const flodeskFormConfig = {
   id: "6afe8066aae4dbf8b1851ddc",
   rootClass: "ff-6afe8066aae4dbf8b1851ddc",
-  action: "/api/flodesk/submit",
+  action: "https://form.flodesk.com/forms/6afe8066aae4dbf8b1851ddc/submit",
   submitEndpoint: "https://form.flodesk.com/forms/6afe8066aae4dbf8b1851ddc/submit",
   successRedirect: "https://consultation.digitalrajen.com/thank-you",
   encodedConfig:
