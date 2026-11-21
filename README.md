@@ -28,8 +28,7 @@ npm run build
 
 ## Before you launch
 
-- Replace the temporary Vimeo demo URL in `lib/config.ts` with the final video.
-- Confirm the WhatsApp number in `lib/config.ts`.
+- YouTube video and WhatsApp contact are configured in `lib/config.ts`.
 - Add the square favicon when it is available.
 - Set `NEXT_PUBLIC_SITE_URL` to the real production domain.
 - Submit a real test lead and confirm it appears in the correct Flodesk segment.
