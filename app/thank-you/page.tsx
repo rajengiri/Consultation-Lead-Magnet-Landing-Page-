@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Header from "@/components/Header";
-import VimeoEmbed from "@/components/VimeoEmbed";
+import YouTubeEmbed from "@/components/YouTubeEmbed";
 import WhatsAppButton from "@/components/WhatsAppButton";
 
 export const metadata: Metadata = {
@@ -41,7 +41,7 @@ export default function ThankYouPage() {
             </div>
 
             <div className="mt-6">
-              <VimeoEmbed />
+              <YouTubeEmbed />
             </div>
 
             <div className="mt-7">

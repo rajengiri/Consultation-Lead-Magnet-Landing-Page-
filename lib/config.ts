@@ -74,9 +74,7 @@ export const siteConfig = {
   ],
   showUrgency: false,
   urgencyText: "",
-  // Paste the full Vimeo video URL here, for example: https://vimeo.com/123456789
-  // Temporary public demo video. Replace this with your own Vimeo URL before launch.
-  vimeoUrl: "https://vimeo.com/739755578",
+  youtubeUrl: "https://youtu.be/Ca-PNb8TZ3g",
   // Paste the WhatsApp number here using digits only, including country code, with no + sign.
   whatsappNumber: "9779851034580",
 } as const;
